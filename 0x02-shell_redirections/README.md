@@ -22,3 +22,4 @@ The 20-hiago  script removes all letters c and C from input.
 The 21-reverse script  reverses its input.
 The 22-users_and_homes script displays all users and their home directories, sorted by users.
 The 100-empty_casks script  finds all empty files and directories in the current directory and all sub-directories.
+The 101-gifs  script ists all the files with a .gif extension in the current directory and all its sub-directories.
