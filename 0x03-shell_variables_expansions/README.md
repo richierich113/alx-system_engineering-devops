@@ -9,3 +9,4 @@ The 7-create_global_variable script creates a new global variable with name as B
 The 8-true_knowledge script prints the result of the addition of 128 with the value stored in the environment variable TRUEKNOWLEDGE, followed by a new line.
 The 9-divide_and_rule script prints the result of POWER divided by DIVIDE, followed by a new line.
 The 10-love_exponent_breath script displays the result of BREATH to the power LOVE where BREATH and LOVE are environment or global variables.
+The 11-binary_to_decimal script converts a number from base 2 to base 10 where the number in base 2 is stored in the environment variable BINARY.
