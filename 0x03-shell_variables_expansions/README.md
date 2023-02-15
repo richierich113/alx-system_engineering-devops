@@ -11,3 +11,4 @@ The 9-divide_and_rule script prints the result of POWER divided by DIVIDE, follo
 The 10-love_exponent_breath script displays the result of BREATH to the power LOVE where BREATH and LOVE are environment or global variables.
 The 11-binary_to_decimal script converts a number from base 2 to base 10 where the number in base 2 is stored in the environment variable BINARY.
 The 12-combinations script prints all possible combinations of two letters, except oo. The requirements are that Letters are lower cases, from a to z and One combination per line and the output should be alpha ordered, starting with aa and not print oo.
+The 13-print_float script prints a number with two decimal places, followed by a new line. The number will be stored in the environment variable NUM.
