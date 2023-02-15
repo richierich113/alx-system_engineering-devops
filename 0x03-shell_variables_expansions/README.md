@@ -12,3 +12,4 @@ The 10-love_exponent_breath script displays the result of BREATH to the power LO
 The 11-binary_to_decimal script converts a number from base 2 to base 10 where the number in base 2 is stored in the environment variable BINARY.
 The 12-combinations script prints all possible combinations of two letters, except oo. The requirements are that Letters are lower cases, from a to z and One combination per line and the output should be alpha ordered, starting with aa and not print oo.
 The 13-print_float script prints a number with two decimal places, followed by a new line. The number will be stored in the environment variable NUM.
+The 100-decimal_to_hexadecimal script converts a number from base 10 to base 16. The number in base 10 is stored in the environment variable DECIMAL.
