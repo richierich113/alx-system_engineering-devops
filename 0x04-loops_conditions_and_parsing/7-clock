@@ -5,10 +5,11 @@
 # uses the while loop
 
 hr=0
-mins=1
 while [ $hr -le 12 ]
     do
         echo "Hour: $hr"
+
+        mins=1
         while [ $mins -le 59 ]
             do
                 echo "$mins"
