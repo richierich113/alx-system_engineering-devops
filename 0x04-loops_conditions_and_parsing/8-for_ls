@@ -3,7 +3,6 @@
 # Only displays the part of the name after the first dash
 
 dir_items=$(ls)
-
 for item in $dir_items
     do
         echo "$item" | cut -d '-' -f 2-
