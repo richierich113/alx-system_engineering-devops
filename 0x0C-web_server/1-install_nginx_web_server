@@ -9,8 +9,17 @@
 # As an answer file, write a Bash script that configures a new Ubuntu machine to respect above requirements (this script will be run on the server itself)
 # You can’t use systemctl for restarting nginx
 
+# Update package lists to make sure we have the latest information
 sudo apt-get update -y
+
+# Install Nginx
 sudo apt-get install -y nginx
-sudo chmod -R 777 /var/www
-sudo echo "Hello World!" > /var/www/html/index.html
+
+# Ensure Nginx is listening on port 80
+# The default configuration should already have this, so no explicit action needed
+
+# Create a simple HTML page with "Hello World!"
+echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
+
+# Start Nginx
 sudo service nginx start
