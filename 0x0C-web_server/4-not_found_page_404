@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Configure your Nginx server to have a custom 404 page that contains 
+#     the string `Ceci n'est pas une page`.
+
+# Requirements:
+#     The page must return an HTTP 404 error code
+#     The page must contain the string `Ceci n'est pas une page`
+#     Using what you did with `3-redirection`, write `4-not_found_page_404` so that it configures a brand
+#         new Ubuntu machine to the requirements asked in this task
+
+sudo apt-get update -y
+sudo apt-get install -y nginx
+sudo chmod -R 777 /var/www
+echo "Hello World!" > /var/www/html/index.html
+echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
+sudo service nginx start
+# Even More Addition
+replace="listen \[::\]:80 default_server;"
+replacement="listen \[::\]:80 default_server;\n\tlocation \/redirect_me {rewrite \/redirect_me https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4 permanent; return 301;}\n\n\terror_page 404 \/custom_404.html;\n\tlocation = \/custom_404.html {root \/var\/www\/html;internal;}\n"
+file="/etc/nginx/sites-available/default"
+sudo sed -i s/"$replace"/"$replacement"/g "$file"
+sudo service nginx restart
