@@ -1,42 +1,21 @@
 #!/usr/bin/env bash
+# Configure your Nginx server so that `/redirect_me` is redirecting to another page.
 
-# Update package lists to ensure we have the latest information
+# Requirements:
+#     The redirection must be a “301 Moved Permanently”
+#     You answer file should be a Bash script containing commands to automatically configure
+#         a Ubuntu machine to respect above requirements
+#     Using what you did with `1-install_nginx_web_server`, write `3-redirection` so that it configures a
+#         brand new Ubuntu machine to the requirements asked in this task
+
 sudo apt-get update -y
-
-# Install Nginx
 sudo apt-get install -y nginx
-
-# Create a new configuration file for redirection
-sudo tee /etc/nginx/sites-available/redirect_me <<EOF
-server {
-    listen 80;
-    listen [::]:80;
-
-    server_name _;
-
-    location /redirect_me {
-        return 301 https://example.com/new_page;
-    }
-
-    location / {
-        return 404;
-    }
-}
-EOF
-
-# Create a symbolic link to enable the new configuration
-sudo ln -s /etc/nginx/sites-available/redirect_me /etc/nginx/sites-enabled/
-
-# Test Nginx configuration
-sudo nginx -t
-
-# Restart Nginx
+sudo chmod -R 777 /var/www
+echo "Hello World!" > /var/www/html/index.html
+sudo service nginx start
+# New Addition
+replace="listen \[::\]:80 default_server;"
+replacement="listen \[::\]:80 default_server;\n\tlocation \/redirect_me {rewrite \/redirect_me https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4 permanent; return 301;}"
+file="/etc/nginx/sites-available/default"
+sudo sed -i s/"$replace"/"$replacement"/g "$file"
 sudo service nginx restart
-
-# Verify Nginx is running
-nginx_status=$(curl -s -o /dev/null -w "%{http_code}" http://localhost/redirect_me)
-if [ $nginx_status -eq 301 ]; then
-    echo "Nginx is running and configured to redirect /redirect_me to another page with a 301 status code."
-else
-    echo "Failed to configure Nginx redirection."
-fi
