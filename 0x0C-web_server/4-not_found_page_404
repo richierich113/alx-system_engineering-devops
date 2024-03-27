@@ -8,15 +8,32 @@
 #     Using what you did with `3-redirection`, write `4-not_found_page_404` so that it configures a brand
 #         new Ubuntu machine to the requirements asked in this task
 
-sudo apt-get update -y
-sudo apt-get install -y nginx
-sudo chmod -R 777 /var/www
-echo "Hello World!" > /var/www/html/index.html
-echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
-sudo service nginx start
-# Even More Addition
-replace="listen \[::\]:80 default_server;"
-replacement="listen \[::\]:80 default_server;\n\tlocation \/redirect_me {rewrite \/redirect_me https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4 permanent; return 301;}\n\n\terror_page 404 \/custom_404.html;\n\tlocation = \/custom_404.html {root \/var\/www\/html;internal;}\n"
-file="/etc/nginx/sites-available/default"
-sudo sed -i s/"$replace"/"$replacement"/g "$file"
-sudo service nginx restart
+CONFIG_FILE="/etc/nginx/sites-available/default"
+# install nginx
+apt-get -y update
+apt-get -y install nginx
+
+# update index.html file
+echo 'Holberton School' > /usr/share/nginx/html/index.html
+echo "Ceci n'est pas une page" > /usr/share/nginx/html/404.html
+
+# update config file to redirect
+printf %s "server {
+    listen 80;
+    listen [::]:80 default_server;
+    root   /usr/share/nginx/html;
+    index  index.html index.htm;
+
+    location /redirect_me {
+        return 301 http://google.com/;
+    }
+
+    error_page 404 /404.html;
+    location /404 {
+      root /usr/share/nginx/html;
+      internal;
+    }
+}" > $CONFIG_FILE
+
+# start nginx after reloading config
+service nginx start
