@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# adjust nginx config ports 8080 with port 80
-sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
-# start nginx service on the adjusted port
+# script to fix nginx server that won't shut off via daemon manager
+mv /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+cp /etc/nginx/sites-enabled/default /etc/nginx/sites-available/default 
+service nginx stop
+pkill nginx
 service nginx start
