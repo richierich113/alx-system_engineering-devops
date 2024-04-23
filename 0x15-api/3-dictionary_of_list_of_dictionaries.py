@@ -27,6 +27,7 @@ def reqjson(url):
     res = requests.get(url)
     return res.json()
 
+
 if __name__ == '__main__':
     filename = 'todo_all_employees.json'
     employees_data = reqjson(users_data_url)
